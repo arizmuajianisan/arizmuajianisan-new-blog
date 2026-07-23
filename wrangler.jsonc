@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "arizmuajianisan-blog",
+  "main": "./.output/server/index.mjs",
+  "compatibility_date": "2025-01-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./.output/public"
+  }
+  // No D1 binding required: the @nuxt/content database is used at build time only
+  // because every route is prerendered. The Worker just serves static HTML + assets.
+}
