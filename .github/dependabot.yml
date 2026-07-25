@@ -1,0 +1,46 @@
+# Dependabot version updates.
+# Alerts/security updates are toggled in the repo Settings UI; this file adds
+# the *scheduled* dependency-bump PRs on top of that.
+# Docs: https://docs.github.com/code-security/dependabot/dependabot-version-updates
+version: 2
+updates:
+  # pnpm / npm dependencies (package.json + pnpm-lock.yaml).
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    commit-message:
+      prefix: chore
+      include: scope
+    # Batch low-risk bumps into a single PR to cut review noise; keep major
+    # bumps separate so breaking changes get their own scrutiny.
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  # Versions pinned inside .github/workflows/*.yml (actions/checkout, etc.).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Jakarta
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        update-types:
+          - minor
+          - patch
