@@ -27,7 +27,7 @@
     "@nuxt/eslint": "^1.16.0",
     "better-sqlite3": "^12.11.1",
     "eslint": "^10.5.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vue-tsc": "^3.3.5",
     "wrangler": "^4.104.0"
   },
