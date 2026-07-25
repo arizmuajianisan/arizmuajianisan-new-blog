@@ -67,17 +67,24 @@ if (post.value) {
     class="py-12"
   >
     <div class="mx-auto max-w-2xl">
-      <article>
+      <UButton
+        to="/"
+        icon="i-lucide-arrow-left"
+        color="neutral"
+        variant="link"
+        class="-ml-2 mb-6"
+      >
+        Back to posts
+      </UButton>
+
+      <article
+        v-motion
+        :initial="{ opacity: 0, y: 20 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 500, ease: 'easeOut' } }"
+        class="rounded-2xl border border-default bg-elevated/40 p-6 shadow-sm ring-1 ring-black/5 backdrop-blur-sm sm:p-10 dark:ring-white/5"
+      >
         <header class="mb-8 flex flex-col gap-4">
-          <UButton
-            to="/"
-            icon="i-lucide-arrow-left"
-            color="neutral"
-            variant="link"
-            class="-ml-2 self-start"
-          >
-            Back to posts
-          </UButton>
+          <span class="mono-label text-primary">// article</span>
 
           <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-highlighted">
             {{ post.title }}

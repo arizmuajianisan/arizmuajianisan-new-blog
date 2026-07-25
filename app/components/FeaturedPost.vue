@@ -13,7 +13,7 @@ const to = computed(() => postPath(props.post))
     :to="to"
     variant="subtle"
     spotlight
-    class="group"
+    class="group h-full transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
   >
     <div class="flex flex-col gap-4">
       <UBadge

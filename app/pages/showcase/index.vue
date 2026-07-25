@@ -19,13 +19,16 @@ useSeoMeta({
       class="mt-8"
     >
       <UPageCard
-        v-for="project in projects"
+        v-for="(project, i) in projects"
         :key="project.path"
+        v-motion
+        :initial="{ opacity: 0, y: 28 }"
+        :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, delay: (i % 3) * 80, ease: 'easeOut' } }"
         :to="projectPath(project)"
         :title="project.title"
         :description="project.description"
         spotlight
-        class="h-full"
+        class="group h-full transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
       >
         <template
           v-if="project.tech?.length"
