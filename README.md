@@ -192,6 +192,24 @@ serves static HTML and assets.
 
 The RSS feed (`/rss.xml`) is a prerendered Nitro route (`server/routes/rss.xml.ts`).
 
+### Dependency updates — `.github/dependabot.yml`
+
+[Dependabot](https://docs.github.com/code-security/dependabot) keeps dependencies
+current via scheduled pull requests:
+
+- **npm ecosystem** — watches `package.json` + `pnpm-lock.yaml` (the `npm`
+  ecosystem handles pnpm lockfiles). Minor/patch bumps are **grouped into one PR**
+  to cut review noise; majors get their own PR.
+- **github-actions ecosystem** — keeps the action versions pinned in
+  `.github/workflows/*.yml` (e.g. `actions/checkout`) up to date.
+- Runs **weekly** (Monday, `Asia/Jakarta`), labels PRs `dependencies`, and uses
+  conventional-commit messages (`chore(deps):` / `ci:`).
+
+PRs are **merged manually** (no auto-merge). The push CI workflow
+(`.github/workflows/ci.yml`) lints + typechecks each one, so wait for the green
+check before merging. Dependabot **security alerts / updates** are enabled
+separately in the repo's Settings → Security tab.
+
 ## Project structure
 
 ```
@@ -207,6 +225,8 @@ content.config.ts          Content collection schema + normalization
 server/routes/rss.xml.ts   RSS feed
 nuxt.config.ts             Modules, site/SEO, Nitro Cloudflare preset, prerender
 wrangler.jsonc             Cloudflare Workers deploy config
+.github/dependabot.yml     Weekly grouped dependency-update PRs
+.github/workflows/ci.yml   CI: lint + typecheck on push
 ```
 
 ## License
