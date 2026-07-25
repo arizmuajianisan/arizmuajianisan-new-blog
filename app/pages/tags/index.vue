@@ -27,12 +27,19 @@ useSeoMeta({
     />
 
     <div class="mt-8 flex flex-wrap gap-2">
-      <TagBadge
-        v-for="item in tags"
+      <span
+        v-for="(item, i) in tags"
         :key="item.tag"
-        :tag="item.tag"
-        :count="item.count"
-      />
+        v-motion
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :enter="{ opacity: 1, scale: 1, transition: { duration: 350, delay: i * 40, ease: 'easeOut' } }"
+        class="inline-flex"
+      >
+        <TagBadge
+          :tag="item.tag"
+          :count="item.count"
+        />
+      </span>
     </div>
   </UContainer>
 </template>

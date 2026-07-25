@@ -4,17 +4,25 @@ const props = defineProps<{
   count?: number
 }>()
 
+const route = useRoute()
+
 const label = computed(() => tagLabel(props.tag))
-const to = computed(() => `/tags/${tagSlug(props.tag)}`)
+const slug = computed(() => tagSlug(props.tag))
+const to = computed(() => `/tags/${slug.value}`)
+
+// A tag is "active" when we're on its own tag page — give it the emerald
+// brand fill so the current filter is unmistakable.
+const isActive = computed(() => route.params.tag === slug.value)
 </script>
 
 <template>
   <UButton
     :to="to"
-    color="neutral"
-    variant="subtle"
+    :color="isActive ? 'primary' : 'neutral'"
+    :variant="isActive ? 'solid' : 'subtle'"
     size="sm"
     icon="i-lucide-hash"
+    class="transition-all duration-200 ease-out hover:scale-105 hover:shadow-sm hover:shadow-primary/20"
   >
     {{ label }}
     <template
