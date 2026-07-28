@@ -135,14 +135,18 @@ const rise = (delay: number) => ({
       description="Posts worth starting with."
     >
       <div class="grid gap-6 sm:grid-cols-2">
-        <FeaturedPost
+        <!-- v-motion lives on a wrapper div, never on the card's own <a> root:
+             the directive mutates the element's style during hydration, which
+             leaves a NuxtLink root un-clickable until a client-side re-render. -->
+        <div
           v-for="(post, i) in featured"
           :key="post.path"
           v-motion
           :initial="{ opacity: 0, y: 28 }"
           :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, delay: i * 80, ease: 'easeOut' } }"
-          :post="post"
-        />
+        >
+          <FeaturedPost :post="post" />
+        </div>
       </div>
     </UPageSection>
 
@@ -152,14 +156,15 @@ const rise = (delay: number) => ({
       description="Everything I've written, newest first."
     >
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <PostCard
+        <div
           v-for="(post, i) in allPosts"
           :key="post.path"
           v-motion
           :initial="{ opacity: 0, y: 28 }"
           :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, delay: (i % 3) * 80, ease: 'easeOut' } }"
-          :post="post"
-        />
+        >
+          <PostCard :post="post" />
+        </div>
       </div>
     </UPageSection>
   </div>
