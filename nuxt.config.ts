@@ -57,6 +57,18 @@ export default defineNuxtConfig({
     }
   },
 
+  // Resolve icons entirely from the locally-installed @iconify-json packages so the
+  // build/prerender never depends on api.iconify.design (also silences dev warnings).
+  icon: {
+    serverBundle: {
+      collections: ['lucide', 'simple-icons']
+    },
+    clientBundle: {
+      scan: true
+    },
+    fallbackToApi: false
+  },
+
   // Static OG images only (default + per-post frontmatter). Runtime OG generation
   // does not run on Cloudflare Workers, so it is disabled.
   ogImage: {
