@@ -1,3 +1,11 @@
+# Force patched versions of transitive deps flagged by Dependabot security alerts.
+# These are pulled in via @nuxtjs/seo / @nuxt/* / wrangler, so they can't be bumped
+# from package.json directly. Remove an entry once the parent ships the fix itself.
+overrides:
+  'undici@>=7.0.0 <7.29.0': '>=7.29.0'
+  'valibot': '1.4.2'
+  'esbuild@<0.28.1': '>=0.28.1'
+
 allowBuilds:
   '@parcel/watcher': false
   '@tailwindcss/oxide': false
