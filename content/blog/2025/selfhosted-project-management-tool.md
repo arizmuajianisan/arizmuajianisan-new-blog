@@ -7,7 +7,7 @@ featured: false
 draft: true
 tags:
   - leantime
-  - selfhosted
+  - self-hosted
   - project-management
   - docker
 ---

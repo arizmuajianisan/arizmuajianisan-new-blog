@@ -6,11 +6,11 @@ description: Learn the standard deployment architecture using Cloudflare Zero Tr
 featured: false
 draft: false
 tags:
-  - Docker
-  - Traefik
-  - Cloudflare Tunnel
-  - Reverse Proxy
-  - Deployment
+  - docker
+  - traefik
+  - cloudflare tunnel
+  - reverse proxy
+  - deployment
 ---
 
 This standard deployment architecture uses Cloudflare Zero Trust Tunnel as the secure public entry point, Traefik as the global reverse proxy, and Docker Compose for app stacks. It keeps server inbound ports closed, enables dynamic service discovery, and supports monorepo or separate repo setups.

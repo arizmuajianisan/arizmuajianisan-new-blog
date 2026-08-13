@@ -43,7 +43,7 @@ export default defineNuxtConfig({
     preset: 'cloudflare_module',
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/about', '/showcase', '/tags', '/rss.xml', '/sitemap.xml'],
+      routes: ['/', '/about', '/showcase', '/posts', '/rss.xml', '/sitemap.xml'],
       failOnError: false
     }
   },
