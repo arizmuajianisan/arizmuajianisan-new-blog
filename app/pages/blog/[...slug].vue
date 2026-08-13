@@ -2,9 +2,16 @@
 const route = useRoute()
 const site = useSiteConfig()
 
-const { data: post } = await useAsyncData(`post-${route.path}`, () => {
+// Content paths are stored without a trailing slash, but Cloudflare's canonical
+// URL for a post carries one (the no-slash URL 301/307-redirects to it). Strip
+// any trailing slash so the query matches the same document on both the server
+// and the client — otherwise a direct hit on the trailing-slash URL queries
+// with the slash, finds nothing, and the page renders blank after hydration.
+const contentPath = route.path.replace(/\/+$/, '') || '/'
+
+const { data: post } = await useAsyncData(`post-${contentPath}`, () => {
   return queryCollection('blog')
-    .path(route.path)
+    .path(contentPath)
     .first()
 })
 
