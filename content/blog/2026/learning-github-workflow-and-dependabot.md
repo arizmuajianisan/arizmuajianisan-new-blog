@@ -3,8 +3,8 @@ title: "Learning GitHub Workflow and Dependabot"
 author: "arizmuajianisan"
 pubDatetime: 2026-08-13T09:00:00Z
 description: "How I set up Dependabot to keep this blog's dependencies up to date, and what I learned wiring it together with GitHub Actions and auto-merge."
-featured: false
-draft: true
+featured: true
+draft: false
 tags:
   - github
   - github-actions
