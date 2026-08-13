@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const navLinks = [
   { label: 'Home', to: '/', icon: 'i-lucide-home' },
-  { label: 'Tags', to: '/tags', icon: 'i-lucide-hash' },
+  { label: 'Posts', to: '/posts', icon: 'i-lucide-newspaper' },
   { label: 'Showcase', to: '/showcase', icon: 'i-lucide-layout-grid' },
   { label: 'About', to: '/about', icon: 'i-lucide-user' }
 ]

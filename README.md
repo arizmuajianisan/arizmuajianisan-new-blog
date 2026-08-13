@@ -9,8 +9,8 @@ Migrated from a previous Astro blog. Posts are plain Markdown.
 ## Features
 
 - Markdown-driven blog (`@nuxt/content` v3)
-- Homepage with a welcome hero, a **featured** post section, and all posts newest-first
-- Tag/category browsing (`/tags` and `/tags/<tag>`)
+- Homepage with a welcome hero, a skills + tech-stack overview, and a **featured** post section
+- Dedicated `/posts` archive with live keyword search and tag filtering (`/posts?tag=<tag>`)
 - Showcase and About pages
 - Dark / light theme toggle
 - SEO: sitemap, RSS feed, Open Graph + canonical tags, `BlogPosting` structured data

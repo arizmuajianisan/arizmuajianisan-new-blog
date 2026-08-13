@@ -2,7 +2,6 @@
 const { data: posts } = await useBlogPosts()
 
 const featured = computed(() => (posts.value ?? []).filter(p => p.featured))
-const allPosts = computed(() => posts.value ?? [])
 
 // Small helper so the hero elements share one coordinated slide-up + fade
 // entrance, each nudged later than the last for a staggered reveal.
@@ -10,6 +9,23 @@ const rise = (delay: number) => ({
   initial: { opacity: 0, y: 24 },
   enter: { opacity: 1, y: 0, transition: { duration: 550, delay, ease: 'easeOut' } }
 })
+
+// What I do — a few core areas of focus, kept short and editable.
+const skills = [
+  { icon: 'i-lucide-code-2', title: 'Software Development', description: 'Building web apps and tools end to end.' },
+  { icon: 'i-lucide-server', title: 'Self-Hosting', description: 'Running my own services on my own metal.' },
+  { icon: 'i-lucide-git-branch', title: 'DevOps / CI-CD', description: 'Automating builds, tests, and deploys.' },
+  { icon: 'i-lucide-container', title: 'Containerization', description: 'Docker-first, reproducible environments.' },
+  { icon: 'i-lucide-network', title: 'Networking', description: 'Reverse proxies, tunnels, and secure routing.' },
+  { icon: 'i-lucide-terminal', title: 'Linux Administration', description: 'Comfortable living in the shell.' }
+]
+
+// Tools I reach for, grouped by layer of the stack.
+const stack = [
+  { group: 'Infrastructure', items: ['Docker', 'Traefik', 'Cloudflare', 'Linux'] },
+  { group: 'Development', items: ['TypeScript', 'Nuxt', 'Vue', 'Node'] },
+  { group: 'Tooling', items: ['Git', 'GitHub Actions'] }
+]
 </script>
 
 <template>
@@ -54,8 +70,8 @@ const rise = (delay: number) => ({
             class="flex flex-wrap gap-3"
           >
             <UButton
-              to="#posts"
-              trailing-icon="i-lucide-arrow-down"
+              to="/posts"
+              trailing-icon="i-lucide-arrow-right"
               size="lg"
             >
               Browse all posts
@@ -130,6 +146,65 @@ const rise = (delay: number) => ({
     </UContainer>
 
     <UPageSection
+      title="What I do"
+      description="The areas I work in and enjoy writing about."
+    >
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          v-for="(skill, i) in skills"
+          :key="skill.title"
+          v-motion
+          :initial="{ opacity: 0, y: 24 }"
+          :visible-once="{ opacity: 1, y: 0, transition: { duration: 450, delay: (i % 3) * 80, ease: 'easeOut' } }"
+          class="group flex flex-col gap-3 rounded-xl border border-default bg-elevated/40 p-5 ring-1 ring-black/5 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 dark:ring-white/5"
+        >
+          <div class="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
+            <UIcon
+              :name="skill.icon"
+              class="size-5"
+            />
+          </div>
+          <h3 class="font-semibold text-highlighted">
+            {{ skill.title }}
+          </h3>
+          <p class="text-sm text-muted">
+            {{ skill.description }}
+          </p>
+        </div>
+      </div>
+    </UPageSection>
+
+    <UPageSection
+      title="Tech stack"
+      description="The tools I reach for, day to day."
+    >
+      <div class="flex flex-col gap-8">
+        <div
+          v-for="(layer, i) in stack"
+          :key="layer.group"
+          v-motion
+          :initial="{ opacity: 0, y: 20 }"
+          :visible-once="{ opacity: 1, y: 0, transition: { duration: 450, delay: i * 90, ease: 'easeOut' } }"
+          class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6"
+        >
+          <span class="mono-label text-primary sm:w-40 sm:shrink-0">// {{ layer.group }}</span>
+          <div class="flex flex-wrap gap-2">
+            <UBadge
+              v-for="item in layer.items"
+              :key="item"
+              color="neutral"
+              variant="subtle"
+              size="lg"
+              class="font-mono"
+            >
+              {{ item }}
+            </UBadge>
+          </div>
+        </div>
+      </div>
+    </UPageSection>
+
+    <UPageSection
       v-if="featured.length"
       title="Featured"
       description="Posts worth starting with."
@@ -150,22 +225,17 @@ const rise = (delay: number) => ({
       </div>
     </UPageSection>
 
-    <UPageSection
-      id="posts"
-      title="All posts"
-      description="Everything I've written, newest first."
-    >
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div
-          v-for="(post, i) in allPosts"
-          :key="post.path"
-          v-motion
-          :initial="{ opacity: 0, y: 28 }"
-          :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, delay: (i % 3) * 80, ease: 'easeOut' } }"
+    <UContainer class="pb-20 sm:pb-24">
+      <div class="flex justify-center">
+        <UButton
+          to="/posts"
+          trailing-icon="i-lucide-arrow-right"
+          size="lg"
+          variant="subtle"
         >
-          <PostCard :post="post" />
-        </div>
+          Read all posts
+        </UButton>
       </div>
-    </UPageSection>
+    </UContainer>
   </div>
 </template>

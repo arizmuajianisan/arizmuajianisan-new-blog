@@ -8,11 +8,13 @@ const route = useRoute()
 
 const label = computed(() => tagLabel(props.tag))
 const slug = computed(() => tagSlug(props.tag))
-const to = computed(() => `/tags/${slug.value}`)
+const to = computed(() => `/posts?tag=${slug.value}`)
 
-// A tag is "active" when we're on its own tag page — give it the emerald
-// brand fill so the current filter is unmistakable.
-const isActive = computed(() => route.params.tag === slug.value)
+// A tag is "active" when we're on the posts hub with this tag selected — give
+// it the emerald brand fill so the current filter is unmistakable.
+const isActive = computed(() =>
+  route.path === '/posts' && route.query.tag === slug.value
+)
 </script>
 
 <template>

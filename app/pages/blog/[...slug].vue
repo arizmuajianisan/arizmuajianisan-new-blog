@@ -73,9 +73,9 @@ if (post.value) {
     v-if="post"
     class="py-12"
   >
-    <div class="mx-auto max-w-2xl">
+    <div class="mx-auto max-w-3xl">
       <UButton
-        to="/"
+        to="/posts"
         icon="i-lucide-arrow-left"
         color="neutral"
         variant="link"
