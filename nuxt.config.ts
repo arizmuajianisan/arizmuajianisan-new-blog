@@ -37,6 +37,18 @@ export default defineNuxtConfig({
     '/': { prerender: true }
   },
 
+  // Resolve icons entirely from the locally-installed @iconify-json packages so the
+  // build/prerender never depends on api.iconify.design (also silences dev warnings).
+  icon: {
+    serverBundle: {
+      collections: ['lucide', 'simple-icons']
+    },
+    clientBundle: {
+      scan: true
+    },
+    fallbackToApi: false
+  },
+
   compatibilityDate: '2025-01-15',
 
   nitro: {
