@@ -32,3 +32,9 @@ jobs:
 
       - name: Typecheck
         run: pnpm run typecheck
+
+      # Runs the full nuxt build (prerender), which exercises the build-time
+      # @nuxt/content SQLite path via better-sqlite3 — the one thing lint and
+      # typecheck don't cover. Catches breakage from native/content deps.
+      - name: Build
+        run: pnpm run build
