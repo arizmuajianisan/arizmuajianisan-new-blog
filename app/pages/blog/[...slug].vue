@@ -73,7 +73,7 @@ if (post.value) {
     v-if="post"
     class="py-12"
   >
-    <div class="mx-auto max-w-3xl">
+    <div class="mx-auto max-w-4xl">
       <UButton
         to="/posts"
         icon="i-lucide-arrow-left"
