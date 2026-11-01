@@ -14,13 +14,13 @@
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.147",
-    "@iconify-json/simple-icons": "^1.2.100",
+    "@iconify-json/lucide": "^1.2.149",
+    "@iconify-json/simple-icons": "^1.2.101",
     "@nuxt/content": "^3.16.2",
     "@nuxt/ui": "^4.12.0",
     "@nuxtjs/seo": "^6.0.1",
     "@vueuse/motion": "^3.0.3",
-    "nuxt": "^4.6.2",
+    "nuxt": "^4.6.3",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
@@ -28,8 +28,8 @@
     "better-sqlite3": "^13.0.1",
     "eslint": "^10.13.0",
     "typescript": "^6.0.3",
-    "vue-tsc": "^3.3.13",
-    "wrangler": "^4.152.0"
+    "vue-tsc": "^3.3.14",
+    "wrangler": "^4.156.0"
   },
   "packageManager": "pnpm@11.8.0"
 }
