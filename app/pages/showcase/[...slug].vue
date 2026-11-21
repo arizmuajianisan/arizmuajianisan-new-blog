@@ -92,6 +92,7 @@ useHead({
               :to="project.url"
               external
               target="_blank"
+              rel="noopener"
               icon="i-lucide-external-link"
               color="primary"
               variant="solid"
@@ -104,6 +105,7 @@ useHead({
               :to="project.repo"
               external
               target="_blank"
+              rel="noopener"
               icon="i-simple-icons-github"
               color="neutral"
               variant="subtle"
