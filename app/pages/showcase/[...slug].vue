@@ -36,92 +36,64 @@ useHead({
 </script>
 
 <template>
-  <UContainer
+  <ArticleShell
     v-if="project"
-    class="py-12"
+    :item="project"
+    back-to="/showcase"
+    back-label="Back to showcase"
+    eyebrow="// project"
   >
-    <div class="mx-auto max-w-2xl">
-      <UButton
-        to="/showcase"
-        icon="i-lucide-arrow-left"
-        color="neutral"
-        variant="link"
-        class="-ml-2 mb-6"
+    <template #meta="{ item }">
+      <div
+        v-if="item.tech?.length"
+        class="flex flex-wrap gap-1.5"
       >
-        Back to showcase
-      </UButton>
+        <UBadge
+          v-for="tech in item.tech"
+          :key="tech"
+          color="neutral"
+          variant="subtle"
+          size="sm"
+        >
+          {{ tech }}
+        </UBadge>
+      </div>
 
-      <article
-        v-motion
-        :initial="{ opacity: 0, y: 20 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 500, ease: 'easeOut' } }"
-        class="rounded-2xl border border-default bg-elevated/40 p-6 shadow-sm ring-1 ring-black/5 backdrop-blur-sm sm:p-10 dark:ring-white/5"
+      <div
+        v-if="item.url || item.repo"
+        class="flex flex-wrap gap-2"
       >
-        <header class="mb-8 flex flex-col gap-4">
-          <span class="mono-label text-primary">// project</span>
+        <UButton
+          v-if="item.url"
+          :to="item.url"
+          external
+          target="_blank"
+          rel="noopener"
+          icon="i-lucide-external-link"
+          color="primary"
+          variant="solid"
+          size="sm"
+        >
+          Visit project
+        </UButton>
+        <UButton
+          v-if="item.repo"
+          :to="item.repo"
+          external
+          target="_blank"
+          rel="noopener"
+          icon="i-simple-icons-github"
+          color="neutral"
+          variant="subtle"
+          size="sm"
+        >
+          Source
+        </UButton>
+      </div>
+    </template>
 
-          <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-highlighted">
-            {{ project.title }}
-          </h1>
-
-          <p class="text-lg text-muted">
-            {{ project.description }}
-          </p>
-
-          <div
-            v-if="project.tech?.length"
-            class="flex flex-wrap gap-1.5"
-          >
-            <UBadge
-              v-for="item in project.tech"
-              :key="item"
-              color="neutral"
-              variant="subtle"
-              size="sm"
-            >
-              {{ item }}
-            </UBadge>
-          </div>
-
-          <div
-            v-if="project.url || project.repo"
-            class="flex flex-wrap gap-2"
-          >
-            <UButton
-              v-if="project.url"
-              :to="project.url"
-              external
-              target="_blank"
-              rel="noopener"
-              icon="i-lucide-external-link"
-              color="primary"
-              variant="solid"
-              size="sm"
-            >
-              Visit project
-            </UButton>
-            <UButton
-              v-if="project.repo"
-              :to="project.repo"
-              external
-              target="_blank"
-              rel="noopener"
-              icon="i-simple-icons-github"
-              color="neutral"
-              variant="subtle"
-              size="sm"
-            >
-              Source
-            </UButton>
-          </div>
-        </header>
-
-        <USeparator class="mb-8" />
-
-        <div class="prose dark:prose-invert max-w-none text-[1.0625rem] sm:text-lg">
-          <ContentRenderer :value="project" />
-        </div>
-      </article>
-    </div>
-  </UContainer>
+    <template #default="{ item }">
+      <ContentRenderer :value="item" />
+    </template>
+  </ArticleShell>
 </template>

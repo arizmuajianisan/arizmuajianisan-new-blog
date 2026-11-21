@@ -69,62 +69,36 @@ if (post.value) {
 </script>
 
 <template>
-  <UContainer
+  <ArticleShell
     v-if="post"
-    class="py-12"
+    :item="post"
+    back-to="/posts"
+    back-label="Back to posts"
+    eyebrow="// article"
   >
-    <div class="mx-auto max-w-4xl">
-      <UButton
-        to="/posts"
-        icon="i-lucide-arrow-left"
-        color="neutral"
-        variant="link"
-        class="-ml-2 mb-6"
+    <template #meta="{ item }">
+      <PostMeta
+        :date="item.pubDatetime"
+        :author="item.author"
+      />
+
+      <div
+        v-if="item.tags?.length"
+        class="flex flex-wrap gap-1.5"
       >
-        Back to posts
-      </UButton>
+        <TagBadge
+          v-for="tag in item.tags"
+          :key="tag"
+          :tag="tag"
+        />
+      </div>
+    </template>
 
-      <article
-        v-motion
-        :initial="{ opacity: 0, y: 20 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 500, ease: 'easeOut' } }"
-        class="rounded-2xl border border-default bg-elevated/40 p-6 shadow-sm ring-1 ring-black/5 backdrop-blur-sm sm:p-10 dark:ring-white/5"
-      >
-        <header class="mb-8 flex flex-col gap-4">
-          <span class="mono-label text-primary">// article</span>
+    <template #default="{ item }">
+      <ContentRenderer :value="item" />
+    </template>
 
-          <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-highlighted">
-            {{ post.title }}
-          </h1>
-
-          <p class="text-lg text-muted">
-            {{ post.description }}
-          </p>
-
-          <PostMeta
-            :date="post.pubDatetime"
-            :author="post.author"
-          />
-
-          <div
-            v-if="post.tags?.length"
-            class="flex flex-wrap gap-1.5"
-          >
-            <TagBadge
-              v-for="tag in post.tags"
-              :key="tag"
-              :tag="tag"
-            />
-          </div>
-        </header>
-
-        <USeparator class="mb-8" />
-
-        <div class="prose dark:prose-invert max-w-none text-[1.0625rem] sm:text-lg">
-          <ContentRenderer :value="post" />
-        </div>
-      </article>
-
+    <template #after>
       <USeparator class="my-10" />
 
       <nav
@@ -151,6 +125,6 @@ if (post.value) {
           </p>
         </UPageCard>
       </nav>
-    </div>
-  </UContainer>
+    </template>
+  </ArticleShell>
 </template>
